@@ -2,8 +2,8 @@
   "manifestVersion": 1,
   "id": "AgentCapabilitiesToVars",
   "name": "Create Variables from Agent Capabilities",
-  "version": "0.0.1",
-  "publisher": "cory-stein",
+  "version": "0.0.2",
+  "publisher": "cory-r-stein",
   "public": true,
   "targets": [{
     "id": "Microsoft.VisualStudio.Services"
