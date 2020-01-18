@@ -12,6 +12,12 @@ pool:
   name: Azure Pipelines
   vmImage: "ubuntu-16.04"
 
+# Build Format
+name: $(Build.DefinitionName)-$(date:yyyyMMdd)$(rev:.r)
+
+# Variables
+variables:
+
 steps:
   - task: NodeTool@0
     inputs:
