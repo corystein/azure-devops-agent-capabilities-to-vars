@@ -8,18 +8,14 @@ trigger:
     include:
       - master
 
-# Build Agent
 pool:
   name: Azure Pipelines
   vmImage: "ubuntu-16.04"
 
-# Build Format
 name: 0.0.0.$(rev:.r)
 
-# Variables
 variables:
 
-# Build Steps
 steps:
   - task: NodeTool@0
     inputs:
