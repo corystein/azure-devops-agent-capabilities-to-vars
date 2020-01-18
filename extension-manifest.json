@@ -41,8 +41,7 @@
     "theme": "dark"
   },
   "icons": {
-    "default": "images/icon.png",
-    "large": "images/icon_large.png"
+    "default": "images/extension-icon.png"
   },
   "files": [{
     "path": "tasks"
