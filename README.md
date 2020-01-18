@@ -1,30 +1,37 @@
 # Agent Capabilties to Variables
 
-Reads values from Hashi Vault key/value engines and create Azure DevOps variables.
+Convert Azure DevOps agent capabilties into pipeline variables.
 
-## Getting Started
+[![Build Status](https://dev.azure.com/cory-r-stein/azure-devops-agent-capabilities-extension/_apis/build/status/Microsoft.azure-devops-extension-sample)](https://dev.azure.com/cory-r-stein/azure-devops-agent-capabilities-extension/_build/latest?definitionId=7)
 
-This extension solves a problem common to environments deployed through Azure DevOps. Often, one task or release creates unique values that need to be consumed by other, independent tasks. These subsequent tasks are not part of the same phase, or even the same release, but they need access to the unique values that were created during the original deployment.
+## Dependencies
 
-### Prerequisites
+The sample repository depends on a few Azure DevOps packages:
 
-This extension requires an existing Key Vault in an accessible Azure subscription.
+- [azure-devops-extension-sdk](https://github.com/Microsoft/azure-devops-extension-sdk): Required module for Azure DevOps extensions which allows communication between the host page and the extension iframe.
+- [azure-devops-extension-api](https://github.com/Microsoft/azure-devops-extension-api): Contains REST client libraries for the various Azure DevOps feature areas.
+- [azure-devops-task-lib](https://github.com/microsoft/azure-pipelines-task-lib): Library used for performing task operations.
 
-## Configuration
+Some external dependencies:
 
-The script can run in one of two modes:
+- `TypeScript` - Samples are written in TypeScript and complied to JavaScript
 
-### Sinlge secret retrieval
+## Building the sample project
 
-This will retrieve a single secret from the selected Key Vault by name. It stores the secret in a VSTS variable with a name matching the name of the secret.
+Just run:
 
-### Multiple secret retrieval
+    npm run build
 
-This mode will retrieve all Key Vault secrets matching the specified tag values. This is useful for situations where several secrets are needed by subsequent tasks. Setting tag values in a format similar to "Environment=Production" enables the retrieval of all Key Vault secrets with a tag named `Environment` evaluating to `Production`.
+This produces a .vsix file which can be uploaded to the [Visual Studio Marketplace](https://marketplace.visualstudio.com/azuredevops)
 
-## Contributing
+## Using the extension
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+The preferred way to get started is to use the `tfx extension init` command which will clone from this sample and prompt you for replacement information (like your publisher id). Just run:
+
+    npm install -g tfx-cli
+    tfx extension init
+
+You can also clone the sample project and change the `publisher` property in `azure-devops-extension.json` to your own Marketplace publisher id. Refer to the online [documentation](https://docs.microsoft.com/en-us/azure/devops/extend/publish/overview?view=vsts) for setting up your own publisher and publishing an extension.
 
 ## Versioning
 
@@ -36,6 +43,16 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 See also the list of [contributors](https://github.com/corystein/ReadHashiVaultSecrets/contributors) who participated in this project.
 
-## License
+# Contributing
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project welcomes contributions and suggestions. Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit https://cla.microsoft.com.
+
+When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
