@@ -4,18 +4,41 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
+  branches:
+    include:
+      - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: Azure Pipelines
+  vmImage: "ubuntu-16.04"
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "10.x"
+    displayName: "Install Node.js"
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+  - displayName: "Install TFX-CLI"
+    bash: |
+      sudo npm install -g tfx-cli
+
+  - task: PowerShell@2
+    displayName: "Build Azure DevOps Extension"
+    inputs:
+      targetType: filePath
+      filePath: ./build-publish.ps1
+      failOnStdErr: false
+      workingDirectory: ./
+
+  - task: CopyFile@2
+    displayName: "Copy Azure DevOps Extension to $(Build.ArtifactStagingDirectory)"
+    inputs:
+      SourceFolder: $(System.DefaultWorkingDirectory)
+      Contents: |
+        **/build-publish.ps1
+        **/*.vsix
+        !**.git/**
+      TargetFolder: "$(Build.ArtifactStagingDirectory)"
+
+  - task: PublishBuildArtifact@1
+    displayName: "Publish Artifact: drop"
