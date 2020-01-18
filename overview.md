@@ -7,12 +7,10 @@ This extension provide the ability to read HashiCorp Vault secrets.
 Azure subscription
 Visual Studio Team Services (VSTS)
 
-## Release notes
+## Change Log
 
-### v1.0.0
-
-- Read secrets from a HashiCorp Vault key/value engine (v1 or v2) and load them into variables.
+[Recent Changes](https://github.com/corystein/azure-devops-agent-capabilities-to-vars/blob/master/CHANGELOG.md)
 
 ## Task Included
 
-- Vault - Read secrets and create Azure DevOps variables
+- agent-capabilities - Convert agent capabilities into pipeline variables
