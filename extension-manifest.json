@@ -1,0 +1,60 @@
+{
+  "manifestVersion": 1,
+  "id": "AgentCapabilitiesToVars",
+  "name": "Create Variables from Agent Capabilities",
+  "version": "0.0.1",
+  "publisher": "cory-stein",
+  "public": true,
+  "targets": [{
+    "id": "Microsoft.VisualStudio.Services"
+  }],
+  "description": "Create variables from agent capabilities",
+  "scopes": ["vso.build", "vso.release", "vso.serviceendpoint"],
+  "categories": ["Azure Pipelines"],
+  "tags": ["Agent", "Capabilities"],
+  "content": {
+    "details": {
+      "path": "overview.md"
+    },
+    "license": {
+      "path": "license.md"
+    }
+  },
+  "links": {
+    "issues": {
+      "uri": "https://github.com/corystein/azure-devops-agent-capabilities-to-vars"
+    },
+    "getstarted": {
+      "uri": "https://github.com/corystein/azure-devops-agent-capabilities-to-vars"
+    },
+    "support": {
+      "uri": "https://github.com/corystein/azure-devops-agent-capabilities-to-vars"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "uri": "https://github.com/corystein/azure-devops-agent-capabilities-to-vars"
+  },
+
+  "branding": {
+    "color": "rgb(36, 43, 50)",
+    "theme": "dark"
+  },
+  "icons": {
+    "default": "images/icon.png",
+    "large": "images/icon_large.png"
+  },
+  "files": [{
+    "path": "tasks"
+  }],
+
+  "contributions": [{
+    "id": "agent-capabilities-task",
+    "type": "ms.vss-distributed-task.task",
+    "description": "Reads values from Hashi Vault key/value engines and create Azure DevOps variables.",
+    "targets": ["ms.vss-distributed-task.tasks"],
+    "properties": {
+      "name": "tasks/agent-capabilities"
+    }
+  }]
+}
