@@ -23,6 +23,7 @@ steps:
     inputs:
       targetType: "inline"
       script: |
+        sudo npm install -g core-js@3
         sudo npm install -g tfx-cli
 
   - task: PowerShell@2

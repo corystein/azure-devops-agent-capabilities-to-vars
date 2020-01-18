@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -13,29 +14,29 @@ const azureDevOps = require("azure-devops-node-api");
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            let token = task.getInput('personalAccessToken', true);
-            let collectionUri = task.getVariable('system.teamFoundationCollectionUri');
+            let token = task.getInput("personalAccessToken", true);
+            let collectionUri = task.getVariable("system.teamFoundationCollectionUri");
             let authHandler = azureDevOps.getPersonalAccessTokenHandler(token);
             let connection = new azureDevOps.WebApi(collectionUri, authHandler);
-            let agentId = Number(task.getVariable('agent.id'));
-            let hostType = task.getVariable('system.hostType');
+            let agentId = Number(task.getVariable("agent.id"));
+            let hostType = task.getVariable("system.hostType");
             let poolId;
             switch (hostType) {
-                case 'build': {
-                    let projectId = task.getVariable('system.teamProjectId');
-                    let buildId = Number(task.getVariable('build.buildId'));
+                case "build": {
+                    let projectId = task.getVariable("system.teamProjectId");
+                    let buildId = Number(task.getVariable("build.buildId"));
                     let buildApi = yield connection.getBuildApi();
                     let build = yield buildApi.getBuild(buildId, projectId);
                     poolId = build.queue.pool.id;
                     break;
                 }
-                case 'release': {
+                case "release": {
                     break;
                 }
-                case 'deployment': {
-                    let deploymentGroupId = Number(task.getVariable('agent.deploymentGroupId'));
+                case "deployment": {
+                    let deploymentGroupId = Number(task.getVariable("agent.deploymentGroupId"));
                     task.debug(`deploymentGroupId: ${deploymentGroupId}`);
-                    let projectId = task.getVariable('system.teamProjectId');
+                    let projectId = task.getVariable("system.teamProjectId");
                     task.debug(`projectId: ${projectId}`);
                     let agentApi = yield connection.getTaskAgentApi();
                     task.debug(`agentApi: ${JSON.stringify(agentApi)}`);
@@ -57,9 +58,9 @@ function run() {
             }
             catch (err) {
                 task.debug(`Error getting agent: ${err}`);
-                throw new Error('Invalid personal access token. Make sure the token is valid and active.');
+                throw new Error("Invalid personal access token. Make sure the token is valid and active.");
             }
-            console.log('Agent capability variables and values. Format: variable=value');
+            console.log("Agent capability variables and values. Format: variable=value");
             console.log();
             // TODO: remove in next major version
             function setTaskVariablesLegacy(capabilities) {
@@ -81,21 +82,21 @@ function run() {
                 }
             }
             if (agent.systemCapabilities) {
-                task.debug('Processing system capabilities');
+                task.debug("Processing system capabilities");
                 setTaskVariablesLegacy(agent.systemCapabilities); // TODO: remove in next major version
-                setTaskVariables('System', agent.systemCapabilities);
+                setTaskVariables("System", agent.systemCapabilities);
             }
             else {
-                task.debug('No system capabilities found');
+                task.debug("No system capabilities found");
             }
             if (agent.userCapabilities) {
-                task.debug('Processing user capabilities');
-                setTaskVariables('User', agent.userCapabilities);
+                task.debug("Processing user capabilities");
+                setTaskVariables("User", agent.userCapabilities);
             }
             else {
-                task.debug('No user capabilities found');
+                task.debug("No user capabilities found");
             }
-            task.setResult(task.TaskResult.Succeeded, 'Succeeded');
+            task.setResult(task.TaskResult.Succeeded, "Succeeded");
         }
         catch (err) {
             task.setResult(task.TaskResult.Failed, err.message);
