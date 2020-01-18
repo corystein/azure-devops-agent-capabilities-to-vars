@@ -61,6 +61,7 @@ try {
     Push-Location -Path $WorkingDirectory
 
     if (-not($PublishFromFile)) {
+        <#
         Push-Location -Path "../"
 
         ./build.ps1
@@ -78,16 +79,17 @@ try {
         }
     
         Pop-Location
+        #>
 
         #############################################
         # Build TypeScript tasks
         #############################################
-        <#
+        
         # Fix for VPN SSL issues
         npm set strict-ssl false
 
-        $tasks = @("generate-build-info-file")
-        $tasks | ForEach-Object {
+        #$tasks = @("generate-build-info-file")
+        (Get-ChildItem -Path "$PSScriptRoot/tasks" -Directory | Select-Object Name).Name | ForEach-Object {
             if ($PSVersionTable.PSEdition -ieq "Core") {
                 Push-Location "$WorkingDirectory/tasks/$_"
             }
@@ -100,7 +102,7 @@ try {
             tsc
             Pop-Location
         }
-        #>
+        
         #############################################
 
         tfx extension create --manifest-globs vss-extension.json
