@@ -2,10 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
-### Changed
+## 0.0.1 (January 18, 2020)
 
-## 2019-09-17
+### IMPROVEMENTS
 
-### Changed
-
-- Updated vault task to use TypeScript
+- Inital release

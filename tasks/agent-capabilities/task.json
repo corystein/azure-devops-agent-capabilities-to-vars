@@ -3,7 +3,7 @@
     "name": "agent-capabilities",
     "friendlyName": "Agent Capabilities",
     "description": "Exposes agent capabilities as variables in your pipeline. Use them just like any other variable in subsequent tasks.",
-    "helpMarkDown": "Having Problems? Please [create an issue on our Github](https://github.com/Fernfrost/vsts-task-agent-capabilities/issues) and we will try to help you.",
+    "helpMarkDown": "Having Problems? Please [create an issue on our Github](https://github.com/corystein/azure-devops-agent-capabilities-to-vars/issues) and we will try to help you.",
     "category": "Utility",
     "author": "Cory Stein",
     "inputs": [{

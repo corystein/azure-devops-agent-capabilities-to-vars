@@ -51,7 +51,7 @@
   "contributions": [{
     "id": "agent-capabilities-task",
     "type": "ms.vss-distributed-task.task",
-    "description": "Reads values from Hashi Vault key/value engines and create Azure DevOps variables.",
+    "description": "Create variable from agent capabilities",
     "targets": ["ms.vss-distributed-task.tasks"],
     "properties": {
       "name": "tasks/agent-capabilities"
