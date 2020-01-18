@@ -33,7 +33,7 @@ steps:
       failOnStdErr: false
       workingDirectory: ./
 
-  - task: CopyFile@2
+  - task: CopyFiles@2
     displayName: "Copy Azure DevOps Extension to $(Build.ArtifactStagingDirectory)"
     inputs:
       SourceFolder: $(System.DefaultWorkingDirectory)
