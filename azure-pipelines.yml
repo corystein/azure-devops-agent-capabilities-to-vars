@@ -14,8 +14,6 @@ pool:
 
 #name: 0.0.0.$(rev:.r)
 
-variables:
-
 steps:
   - task: NodeTool@0
     inputs:
