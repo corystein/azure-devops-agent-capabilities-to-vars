@@ -19,23 +19,46 @@ Some external dependencies:
 ## Building the sample project
 
 Just run:
-
+```bash
     npm run build
+```
 
 This produces a .vsix file which can be uploaded to the [Visual Studio Marketplace](https://marketplace.visualstudio.com/azuredevops)
 
 ## Using the extension
 
 The preferred way to get started is to use the `tfx extension init` command which will clone from this sample and prompt you for replacement information (like your publisher id). Just run:
-
-    npm install -g tfx-cli
-    tfx extension init
+```bash
+    npm install
+    npx tfx extension init
+```
 
 You can also clone the sample project and change the `publisher` property in `azure-devops-extension.json` to your own Marketplace publisher id. Refer to the online [documentation](https://docs.microsoft.com/en-us/azure/devops/extend/publish/overview?view=vsts) for setting up your own publisher and publishing an extension.
 
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+
+## Tests
+
+Provide a config file for secret variables in the form:
+```ts
+export default {
+   systemTeamFoundationCollectionUri: "URI",
+   agentId: "Number",
+   systemHostType: "string (build)",
+   systemTeamProjectId: "Id string",
+   buildBuildId: "Number",
+   personalAccessToken: "string (PAT)",
+   agentName: "string",
+   agentGraphics: "boolean"
+};
+```
+
+And just run:
+```bash
+    npm test
+```
 
 ## Authors
 

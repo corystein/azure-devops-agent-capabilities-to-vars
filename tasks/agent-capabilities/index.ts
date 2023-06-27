@@ -23,7 +23,7 @@ async function run() {
         let projectId = task.getVariable("system.teamProjectId");
         let buildId: number = Number(task.getVariable("build.buildId"));
         let buildApi = await connection.getBuildApi();
-        let build = await buildApi.getBuild(buildId, projectId);
+        let build = await buildApi.getBuild(projectId, buildId);
         poolId = build.queue.pool.id;
         break;
       }
